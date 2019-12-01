@@ -1,3 +1,5 @@
+// #mark  添加 扫码scan() 函数；searchBtnClick() 函数
+
 <template>
   <div>
     <van-nav-bar title="回收发起" @click-left="onClickLeft" :border="false">
@@ -12,8 +14,8 @@
       <div class="inputView">
         <input class="input" placeholder="请输入或扫描电池包码" />
       </div>
-      <img :src="scanImg" style="width: 0.23rem; margin-left: -0.4rem; z-index: 9999;" @click="onClickLeft" />
-      <div class="cancleBtn">取消</div>
+      <img :src="scanImg" style="width: 0.23rem; margin-left: -0.4rem; z-index: 9999;" @click="scan" />
+      <div class="cancleBtn" @click="searchBtnClick">搜索</div>
     </div>
 
     <h3 class="h3divider">电池详情</h3>
@@ -132,7 +134,9 @@ export default {
         battery_model: "12-98V",
         recycle_remark: "",
         evaluation_remark: ""
-      }
+      },
+
+      historyData: ""
     };
   },
   mounted() {
@@ -147,6 +151,11 @@ export default {
       //密码设置成功
       this.info = res.data[0];
     });
+
+    // ---------------------------------------电池包码
+    var data = localStorage.getItem("batteryCode");
+    var dataObj = JSON.parse(data);
+    if (dataObj) this.historyData = dataObj.reverse();
   },
   methods: {
     //图片上传相关
@@ -225,6 +234,44 @@ export default {
         }
       });
     },
+
+
+    // 扫码*************************************
+    scan() {
+      console.log(111);
+      triggerNative("saoyisao", "", (val) => {
+        console.log(res)
+      });
+    },
+    // 搜索*************************************
+    searchBtnClick() {
+      console.log(13213)
+      if (!this.message) {
+        this.$toast.fail("请输入电池包码");
+        return;
+      }
+      var data = localStorage.getItem("batteryCode");
+      var dataObj = JSON.parse(data);
+      if (dataObj) {
+        if (dataObj.length > 7) {
+          var item = dataObj.splice(1, 8);
+          item.push(this.message);
+          localStorage.setItem("batteryCode", JSON.stringify(item));
+        } else {
+          dataObj.push(this.message);
+          localStorage.setItem("batteryCode", JSON.stringify(dataObj));
+        }
+      } else {
+        dataObj = [];
+        dataObj.push(this.message);
+        localStorage.setItem("batteryCode", JSON.stringify(dataObj));
+      }
+
+      // this.$router.push({
+      //   path: "/CarDetail",
+      //   query: { id: this.message }
+      // });
+    }
   }
 };
 </script>

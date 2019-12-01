@@ -6,7 +6,10 @@
       </div>
     </van-nav-bar>
 
-    <span class="subtitle">指定搜索范围</span>
+    <div class="subtitle">
+      指定搜索范围
+      <van-divider></van-divider>
+    </div>
     <van-cell-group :border="false">
       <div class="btnFilterGroup">
         <van-button
@@ -24,7 +27,7 @@
       </div>
     </van-cell-group>
 
-    <van-divider class="divider_10"></van-divider>
+    <van-divider class="divider_10" style="margin:0;"></van-divider>
 
     <van-row
       :class="item.recyclingState==1?'van-row_default':'van-row_active'"
@@ -49,12 +52,11 @@ export default {
     return {
       recyclingState: 1,
       recyclingList: [
-        {batteryPackcode:123123,recyclingState:2},
-        {batteryPackcode:123123,recyclingState:1},
-        {batteryPackcode:123123,recyclingState:2},
-        {batteryPackcode:123123,recyclingState:1},
-        {batteryPackcode:123123,recyclingState:2},
-        {batteryPackcode:123123,recyclingState:1},
+        {batteryPackcode:123,recyclingState:1},
+        {batteryPackcode:123,recyclingState:2},
+        {batteryPackcode:123,recyclingState:1},
+        {batteryPackcode:123,recyclingState:2},
+
       ],
       message: "",
       image: require("../../assets/ic_back_white.png"),
@@ -118,8 +120,13 @@ export default {
 .van-row{
   font-size: 0.14rem;
 }
+.van-divider {
+  margin-top: 0;
+  margin-bottom: 0.15rem;
+}
+
 .subtitle{
-  padding-left: 0.19rem;
+  padding:0 0.19rem;
   color: #666666;
   font-size: 0.13rem;
 }
@@ -144,7 +151,7 @@ export default {
 .van-cell-group{
   margin-bottom: 0.1rem;
   .btnFilterGroup{
-    padding-left: 0.19rem;
+    padding: 0.1rem 0 0 0.19rem;
     .btnFilterActive{
       width: 0.81rem;
       height: 0.29rem;

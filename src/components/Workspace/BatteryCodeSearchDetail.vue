@@ -1,3 +1,5 @@
+// #mark 样式
+
 <template>
   <div>
     <van-nav-bar title="电池详情" @click-left="onClickLeft" :border="false">
@@ -68,7 +70,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="less">
 .van-nav-bar {
   background: #24bb9b;
 }
@@ -77,5 +79,23 @@ export default {
 }
 .van-nav-bar__title {
   color: white;
+  font-size: 0.19rem;
+}
+.van-cell-group .van-cell{
+  height: 0.5rem;
+  line-height: 0.5rem;
+  padding: 0 0.19rem;
+  border-bottom: 1px solid #E8E8E8;
+  font-family: PingFangSC-Regular;
+  font-size: 0.14rem;
+  /deep/.van-cell__value {
+      color: #333;
+  }
+  /deep/.van-cell__title {
+      color: #666;
+  }
+}
+.van-cell:not(:last-child)::after{
+  border: none;
 }
 </style>

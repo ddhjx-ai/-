@@ -135,13 +135,12 @@ export default {
     // 扫码
     scan() {
       console.log(111);
-      triggerNative("saoyisao", "", () => {
-        this.$toast("123");
+      triggerNative("saoyisao", "", (val) => {
+        console.log(res)
       });
     },
     // 搜索
     searchBtnClick() {
-
       console.log(13213)
       if (!this.message) {
         this.$toast.fail("请输入电池包码");
